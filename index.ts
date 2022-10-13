@@ -17,6 +17,9 @@ async function main() {
 
   for (const c of codes) {
     if (typeof checksums[c.checksum] !== "undefined") {
+      console.log(c.id);
+      const contracts = await client.getContracts(c.id);
+      console.log(contracts);
       checksums[c.checksum]++;
     }
   }

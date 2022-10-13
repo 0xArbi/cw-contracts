@@ -101,11 +101,11 @@ async function main() {
         );
 
         if (file.endsWith("_execute_msg.json")) {
-          output.execute = data.oneOf;
+          output.execute = data;
         }
 
         if (file.endsWith("_query_msg.json")) {
-          output.query = data.oneOf;
+          output.query = data;
         }
 
         if (file.endsWith("_response.json")) {
