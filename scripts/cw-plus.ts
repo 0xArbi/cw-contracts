@@ -80,7 +80,7 @@ async function main() {
       }
 
       const source = `/tmp/${formattedName}.tar.gz`;
-      const dest = `/tmp/${formattedName}`;
+      const dest = path.join(__dirname, "..", "data", checksum);
       await Promise.resolve(file)
         .then((x) => x.arrayBuffer())
         .then((x) => writeFilePromise(source, Buffer.from(x)));
@@ -119,7 +119,7 @@ async function main() {
       }
 
       fs.writeFileSync(
-        path.join(__dirname, "..", "data", `${checksum}.json`),
+        path.join(__dirname, "..", "data", checksum, "compiled.json"),
         JSON.stringify(output)
       );
     }

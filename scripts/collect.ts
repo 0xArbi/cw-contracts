@@ -42,10 +42,10 @@ async function main() {
   const outDir = path.join(__dirname, "..", "data", checksum.toLowerCase());
   try {
     console.log("mkdir", outDir);
-    fs.mkdirSync(outDir);
+    fs.mkdirSync(outDir, { recursive: true });
   } catch {}
   console.log("cp", folder, outDir);
-  fs.cpSync(folder, outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, "schema.json"), JSON.stringify(output));
+  fs.cpSync(folder, path.join(outDir, "schema"), { recursive: true });
+  fs.writeFileSync(path.join(outDir, "compiled.json"), JSON.stringify(output));
 }
 main();
