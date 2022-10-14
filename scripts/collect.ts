@@ -40,7 +40,7 @@ async function main() {
 
   const outDir = path.join(__dirname, "..", "data", checksum.toLowerCase());
   fs.mkdirSync(outDir);
-  fs.cpSync(outDir, folder);
+  fs.cpSync(folder, outDir);
   fs.writeFileSync(path.join(outDir, "schema.json"), JSON.stringify(output));
 }
 main();
