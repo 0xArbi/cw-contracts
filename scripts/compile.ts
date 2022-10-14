@@ -33,9 +33,7 @@ async function main() {
       if (file.endsWith("response.json")) {
         output.responses = {
           ...output.responses,
-          [data.title]: {
-            data,
-          },
+          [data.title]: data,
         };
       }
     }

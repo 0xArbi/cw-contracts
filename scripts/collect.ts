@@ -9,36 +9,6 @@ async function main() {
     return;
   }
 
-  const files = fs.readdirSync(path.join(folder, "schema"));
-
-  const output = {
-    execute: {},
-    query: {},
-    responses: {},
-  };
-
-  for (const file of files) {
-    console.log(file);
-    const data = JSON.parse(fs.readFileSync(`${folder}/${file}`).toString());
-
-    if (file.endsWith("execute_msg.json")) {
-      output.execute = data;
-    }
-
-    if (file.endsWith("query_msg.json")) {
-      output.query = data;
-    }
-
-    if (file.endsWith("response.json")) {
-      output.responses = {
-        ...output.responses,
-        [data.title]: {
-          data,
-        },
-      };
-    }
-  }
-
   const outDir = path.join(__dirname, "..", "data", checksum.toLowerCase());
   try {
     console.log("mkdir", outDir);
@@ -46,6 +16,5 @@ async function main() {
   } catch {}
   console.log("cp", folder, outDir);
   fs.cpSync(folder, path.join(outDir, "schema"), { recursive: true });
-  fs.writeFileSync(path.join(outDir, "compiled.json"), JSON.stringify(output));
 }
 main();
