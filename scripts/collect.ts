@@ -45,7 +45,7 @@ async function main() {
     fs.mkdirSync(outDir);
   } catch {}
   console.log("cp", folder, outDir);
-  fs.cpSync(folder, outDir);
+  fs.cpSync(folder, outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, "schema.json"), JSON.stringify(output));
 }
 main();
