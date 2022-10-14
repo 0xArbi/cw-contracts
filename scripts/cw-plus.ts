@@ -134,8 +134,12 @@ async function main() {
         return;
       }
 
+      const output = path.join(__dirname, "..", "data", checksum);
+      try {
+        fs.mkdirSync(output);
+      } catch {}
       fs.writeFileSync(
-        path.join(__dirname, "..", "data", `${checksum}.json`),
+        path.join(output, "compiled.json"),
         JSON.stringify(file)
       );
     });

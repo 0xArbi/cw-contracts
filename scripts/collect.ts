@@ -9,7 +9,7 @@ async function main() {
     return;
   }
 
-  const files = fs.readdirSync(folder);
+  const files = fs.readdirSync(path.join(folder, "schema"));
 
   const output = {
     execute: {},
