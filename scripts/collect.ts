@@ -18,6 +18,7 @@ async function main() {
   };
 
   for (const file of files) {
+    console.log(file);
     const data = JSON.parse(fs.readFileSync(`${folder}/${file}`).toString());
 
     if (file.endsWith("execute_msg.json")) {
@@ -40,8 +41,10 @@ async function main() {
 
   const outDir = path.join(__dirname, "..", "data", checksum.toLowerCase());
   try {
+    console.log("mkdir", outDir);
     fs.mkdirSync(outDir);
   } catch {}
+  console.log("cp", folder, outDir);
   fs.cpSync(folder, outDir);
   fs.writeFileSync(path.join(outDir, "schema.json"), JSON.stringify(output));
 }
