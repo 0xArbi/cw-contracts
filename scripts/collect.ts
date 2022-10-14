@@ -39,7 +39,9 @@ async function main() {
   }
 
   const outDir = path.join(__dirname, "..", "data", checksum.toLowerCase());
-  fs.mkdirSync(outDir);
+  try {
+    fs.mkdirSync(outDir);
+  } catch {}
   fs.cpSync(folder, outDir);
   fs.writeFileSync(path.join(outDir, "schema.json"), JSON.stringify(output));
 }
