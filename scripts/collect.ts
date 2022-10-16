@@ -15,6 +15,8 @@ async function main() {
     fs.mkdirSync(outDir, { recursive: true });
   } catch {}
   console.log("cp", folder, outDir);
-  fs.cpSync(folder, path.join(outDir, "schema"), { recursive: true });
+  fs.cpSync(path.join(folder, "schema"), path.join(outDir, "schema"), {
+    recursive: true,
+  });
 }
 main();
