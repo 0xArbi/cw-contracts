@@ -28,15 +28,40 @@ async function main() {
         ...(data.definitions ?? {}),
       };
 
-      if (file.endsWith("execute_msg.json")) {
+      // fully compiled schema. Let's just munge it to fit our format
+      if (data.instantiate && data.execute && data.query) {
+        output.definitions = {
+          ...output.definitions,
+          ...data.execute.definitions,
+          ...data.query.definitions,
+        };
+        for (const response in data.responses) {
+          if (data.responses[response].definitions) {
+            output.definitions = {
+              ...output.definitions,
+              ...data.responses[response].definitions,
+            };
+          }
+        }
+        output.execute = {
+          ...data.execute,
+          definitions: undefined,
+        };
+        output.query = {
+          ...data.query,
+          definitions: undefined,
+        };
+      }
+
+      if (file.includes("execute_msg")) {
         output.execute = { ...data, definitions: undefined };
       }
 
-      if (file.endsWith("query_msg.json")) {
+      if (file.includes("query_msg.json")) {
         output.query = { ...data, definitions: undefined };
       }
 
-      if (file.endsWith("response.json")) {
+      if (file.includes("response.json")) {
         for (const response in data) {
           if (data[response].definitions) {
             output.definitions = {
